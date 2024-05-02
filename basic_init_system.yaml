@@ -1,7 +1,7 @@
 ---
 - name: Init system
   hosts: all
-  gather_facts： yes
+  gather_facts: yes
 
   vars:
     system_os = ansible_distribution
@@ -13,23 +13,20 @@
         msg: system_os is {{ system_os }}, system_version is {{ system_version }}
       when:
         system_os == 'Centos' and system_version == '7'
+      ignore_errors: no
 
     - name: Start yum install default software
       yum:
         name: 
-          - vimfdsa
-          f
-          sdaf
-          softwared
-          sdaf
+          - vim
           - wget
+        state: latest
 
-
-        state: latest  
-
-
-
-         
-
-
-ß
+    - name: Start get_url repol epel
+      get_url:
+        url: "{{ item }}"
+        dest: /etc/yum.repos.d/epel.repo
+        force_basic_auth: yes
+      loop:
+        - https://mirrors.aliyun.com/repo/epel-7.repo
+        - https://mirrors.aliyun.com/repo/epel-7.repo
