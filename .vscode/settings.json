@@ -4,7 +4,8 @@
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
             "file:///Users/zhangguangde/ansible-playbook/basic_install_k8s.yml",
             "file:///Users/zhangguangde/ansible-playbook/basic_init_system.yaml",
-            "file:///Users/zhangguangde/ansible-playbook/basic_init.yaml"
+            "file:///Users/zhangguangde/ansible-playbook/basic_init.yaml",
+            "file:///Users/zhangguangde/ansible-playbook/basic_install_k8s.yaml"
         ]
     }
 }
