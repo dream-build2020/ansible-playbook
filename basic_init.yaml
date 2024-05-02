@@ -14,6 +14,7 @@
       when:
         - system_os == 'Centos' 
         - system_version == '7'
+      ignore_errors: no
         
 
     - name: start copy file
