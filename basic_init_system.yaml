@@ -1,14 +1,22 @@
 ---
 - name: Init system
   hosts: all
+  gather_facts： yes
+
+  vars:
+    system_os = ansible_distribution
+    system_version = ansible_distribution_version
 
   task:
+    - name: Check system info
+      debug:
+        msg: system_os is {{ system_os }}, system_version is {{ system_version }}
+      when:
+        system_os == 'Centos' and system_version == '7'
 
-  - name: Start yum install software
-    yum:
-      name: 
-        - vim
-      state: latest  
-    
-    
-      
+    - name: Start yum install default software
+      yum:
+        name: 
+          - vim
+          - wget
+        state: latest  
