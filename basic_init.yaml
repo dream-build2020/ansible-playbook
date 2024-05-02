@@ -23,8 +23,9 @@
 
     - name: start install rpm
       yum:
-        - wget
-        - vim
-        - ansible
-        - git
-      state: latest
+        name:
+          - wget
+          - vim
+          - ansible
+          - git
+        state: latest
