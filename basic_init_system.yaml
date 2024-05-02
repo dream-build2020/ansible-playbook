@@ -15,18 +15,20 @@
         system_os == 'Centos' and system_version == '7'
       ignore_errors: no
 
+    - name: Start get_url repol epel
+      get_url:
+        url: "{{ item }}"
+        dest: /etc/yum.repos.d
+        force_basic_auth: yes
+      loop:
+        - https://mirrors.aliyun.com/repo/epel-7.repo
+        - https://mirrors.aliyun.com/repo/Centos-7.repo
+
     - name: Start yum install default software
       yum:
         name: 
           - vim
           - wget
+          - ansible
         state: latest
-
-    - name: Start get_url repol epel
-      get_url:
-        url: "{{ item }}"
-        dest: /etc/yum.repos.d/epel.repo
-        force_basic_auth: yes
-      loop:
-        - https://mirrors.aliyun.com/repo/epel-7.repo
-        - https://mirrors.aliyun.com/repo/epel-7.repo
+      ignore_errors: no
