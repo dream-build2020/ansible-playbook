@@ -1,1 +1,5 @@
 ---
+- hosts: all
+  tasks:
+    - name: start install k8s
+      get_url:
