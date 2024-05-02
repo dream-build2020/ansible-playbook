@@ -1,0 +1,29 @@
+---
+- name: basic_int.yaml
+  hosts: all
+  gather_facts: yes
+
+  vars:
+    system_os: "{{ ansible_distribution }}"
+    system_version: "{{ ansible_distribution_version }}"
+
+  tasks:
+    - name: start copy file
+      copy:
+        src: ./yum_repos_file/{{ item }}
+        dest: /etc/yum.repos.d
+        backup: yes
+      loop:
+        - CentOS-Base.repo
+        - epel.repo
+      ignore_errors: no
+      when:
+        - system_os == 'Centos' 
+        - system_version == '7'
+
+    - name: start install rpm
+      yum:
+        - wget
+        - vim
+        - ansible
+      state: latest
