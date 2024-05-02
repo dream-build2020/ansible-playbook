@@ -1,0 +1,14 @@
+---
+- name: Init system
+  hosts: all
+
+  task:
+
+  - name: Start yum install software
+    yum:
+      name: 
+        - vim
+      state: latest  
+    
+    
+      

@@ -1,5 +1,0 @@
----
-- name: Init system
-  task:
-    debug:
-      msg: hello
