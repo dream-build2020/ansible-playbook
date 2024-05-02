@@ -17,6 +17,19 @@
     - name: Start yum install default software
       yum:
         name: 
-          - vim
+          - vimfdsa
+          f
+          sdaf
+          softwared
+          sdaf
           - wget
+
+
         state: latest  
+
+
+
+         
+
+
+ß
