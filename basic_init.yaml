@@ -8,6 +8,10 @@
     system_version: "{{ ansible_distribution_version }}"
 
   tasks:
+    - name: system info
+      debug:
+        msg: system_os is "{{ system_os }}", system_version is "{{ system_version }}"
+
     - name: start copy file
       copy:
         src: ./yum_repos_file/{{ item }}
@@ -16,7 +20,6 @@
       loop:
         - CentOS-Base.repo
         - epel.repo
-      ignore_errors: no
       when:
         - system_os == 'Centos' 
         - system_version == '7'
