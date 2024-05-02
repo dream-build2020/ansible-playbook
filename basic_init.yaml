@@ -10,12 +10,9 @@
   tasks:
     - name: system info
       debug:
-        msg: system_os is "{{ system_os }}", system_version is "{{ system_version }}"
-      when:
-        - system_os == 'Centos' 
-        - system_version == '7'
-      ignore_errors: no
-        
+        msg: "system_os is '{{ system_os }}', system_version is '{{ system_version }}'"
+      when: ansible_distribution == 'Centos' and ansible_distribution_version == '7'
+      ignore_errors: no       
 
     - name: start copy file
       copy:
