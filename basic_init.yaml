@@ -11,18 +11,19 @@
     - name: system info
       debug:
         msg: system_os is "{{ system_os }}", system_version is "{{ system_version }}"
+      when:
+        - system_os == 'Centos' 
+        - system_version == '7'
+        
 
     - name: start copy file
       copy:
         src: ./yum_repos_file/{{ item }}
         dest: /etc/yum.repos.d
-        backup: yes
+        force: yes
       loop:
         - CentOS-Base.repo
         - epel.repo
-      when:
-        - system_os == 'Centos' 
-        - system_version == '7'
 
     - name: start install rpm
       yum:
