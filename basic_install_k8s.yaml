@@ -1,5 +1,6 @@
 ---
-- tasks:
+- name: start install k8s
+  tasks:
 
     - name: start add k8s rpm
       copy:

@@ -34,8 +34,5 @@
           - git
         state: latest
 
-    - name: start install containerd
-      include: basic_install_containerd.yaml
-
-    - name: start install k8s
-      include: basic_install_k8s.yaml
+    - include: basic_install_containerd.yaml
+    - include: basic_install_k8s.yaml
