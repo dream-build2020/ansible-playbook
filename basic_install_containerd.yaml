@@ -2,7 +2,6 @@
 - name: start install containerd
   hosts: all
   tasks:
-
     - name: start add containerd rpm
       copy:
         src:  ./yum_repos_file/{{ item }}
@@ -16,8 +15,6 @@
         name: 
           - containerd.io
         state: latest
-      register: yum_containerd_stat
 
     - name: start default containerd config
       command: containerd config default > /etc/containerd/config.toml
-      when: yum_containerd_stat | succeeded

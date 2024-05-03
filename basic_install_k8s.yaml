@@ -1,7 +1,7 @@
 ---
 - name: start install k8s
+  hosts: all
   tasks:
-
     - name: start add k8s rpm
       copy:
         src: ./yum_repos_file/{{ item }}
