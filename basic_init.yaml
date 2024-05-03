@@ -32,3 +32,13 @@
           - ansible
           - git
         state: latest
+      register: yum_init_stat
+
+    - name: start install containerd
+      include: baisc_install_containerd.yaml
+      register: yum_containerd_stat
+      when: yum_init_stat | succeeded
+
+    - name: start install k8s
+      include: baisc_install_k8s.yaml
+      when: yum_containerd_stat | succeededå
