@@ -1,5 +1,6 @@
 ---
 - name: start install containerd
+  hosts: all
   tasks:
 
     - name: start add containerd rpm
