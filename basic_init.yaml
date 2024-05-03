@@ -9,7 +9,8 @@
 
   tasks:
     - name: system info
-      fail: system not Centos or not Centos7
+      fail:
+        msg: system not Centos or not Centos7
       when: 
         - ansible_distribution != 'Centos' 
         - ansible_distribution_version != '7'     
