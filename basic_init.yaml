@@ -33,7 +33,7 @@
           - vim
           - ansible
           - git
-        state: latestß
+        state: latest
 
     - name: start install containerd
       include: baisc_install_containerd.yaml
