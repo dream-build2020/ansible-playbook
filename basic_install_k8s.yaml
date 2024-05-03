@@ -1,5 +1,36 @@
 ---
-- hosts: all
+- name: start install k8s
+  hosts: all
   tasks:
-    - name: start install k8s
-      get_url:
+
+    - name: start add k8s rpm
+      copy:
+        src: ./yum_repos_file/{{ item }}
+        dest: /etc/yum.repos.d
+        force: yes
+      loop:
+        - kubernetes.repo
+
+    - name: start k8s cri config
+      copy:
+        src: ./kubernetes_config/ {{ item }}
+        dest: /etc/sysctl.d/
+        force: yes
+      loop:
+        - 99-kubernetes-cri.conf
+
+    - name: start k8s ipvs config
+      copy:
+        src: ./kubernetes_config/ {{ item }}
+        dest: /etc/modules-load.d/
+        force: yes
+      loop:
+        - ipvs.conf
+
+    - name: strat yum install k8s rpm
+      yum:
+        name:
+          - ipset 
+          - ipvsadm
+          - yum-utils
+        state: latest

@@ -1,5 +1,5 @@
 ---
-- name: basic_int.yaml
+- name: start baisc init system
   hosts: all
   gather_facts: yes
 
@@ -11,8 +11,9 @@
     - name: system info
       debug:
         msg: "system_os is '{{ system_os }}', system_version is '{{ system_version }}'"
-      when: ansible_distribution == 'Centos' and ansible_distribution_version == '7'
-      ignore_errors: no       
+      when: 
+        - ansible_distribution == 'Centos' 
+        - ansible_distribution_version == '7'     
 
     - name: start copy file
       copy:
@@ -22,7 +23,7 @@
       loop:
         - CentOS-Base.repo
         - epel.repo
-
+        
     - name: start install rpm
       yum:
         name:
