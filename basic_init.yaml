@@ -34,5 +34,5 @@
           - git
         state: latest
 
-    - include: basic_install_containerd.yaml
-    - include: basic_install_k8s.yaml
+- import_playbook: basic_install_containerd.yaml
+- import_playbook: basic_install_k8s.yaml
