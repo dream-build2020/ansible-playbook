@@ -15,7 +15,7 @@
         - "system not Centos or not Centos7"
       when: 
         - ansible_distribution != 'Centos' 
-        - ansible_distribution_version != '7'     
+        - ansible_distribution_version != '7.9'     
 
     - name: start copy file
       copy:
