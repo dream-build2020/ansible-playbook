@@ -1,6 +1,5 @@
 ---
-- name: start baisc init system
-  hosts: all
+- hosts: all
   gather_facts: yes
 
   vars:
