@@ -36,7 +36,7 @@
         state: latest
 
     - name: start install containerd
-      include_tasks: basic_install_containerd.yaml
+      include: basic_install_containerd.yaml
 
     - name: start install k8s
-      include_tasks: basic_install_k8s.yaml
+      include: basic_install_k8s.yaml
