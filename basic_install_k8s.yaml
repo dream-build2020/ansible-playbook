@@ -12,7 +12,7 @@
 
     - name: start k8s cri config
       copy:
-        src: ./kubernetes_config/ {{ item }}
+        src: ./kubernetes_config/{{ item }}
         dest: /etc/sysctl.d/
         force: yes
       loop:
@@ -20,7 +20,7 @@
 
     - name: start k8s ipvs config
       copy:
-        src: ./kubernetes_config/ {{ item }}
+        src: ./kubernetes_config/{{ item }}
         dest: /etc/modules-load.d/
         force: yes
       loop:

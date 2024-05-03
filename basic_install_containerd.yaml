@@ -18,3 +18,8 @@
 
     - name: start default containerd config
       command: containerd config default > /etc/containerd/config.toml
+
+    - name: start enaled containerd
+      systemd:
+        name: containerd
+        enabled: yes
