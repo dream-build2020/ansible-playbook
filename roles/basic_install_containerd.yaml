@@ -10,6 +10,14 @@
       loop:
         - docker-ce.repo
 
+    - name: start add containerd configure
+      copy:
+        src: ./yum_repos_file/{{ item }}
+        dest: /etc
+        force: yes
+      loop:
+        - crictl.yaml
+
     - name: strat yum install containerd
       yum:
         name: 
@@ -22,4 +30,5 @@
     - name: start enaled containerd
       systemd:
         name: containerd
+        state: started
         enabled: yes

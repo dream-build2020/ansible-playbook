@@ -9,6 +9,13 @@
         force: yes
       loop:
         - kubernetes.repo
+    
+    - name: start disable firewalld
+      systemd:
+        name:
+          - firewalld
+        state: stopped
+        enabled: no
 
     - name: start k8s cri config
       copy:
@@ -32,4 +39,7 @@
           - ipset 
           - ipvsadm
           - yum-utils
+          - kubelet
+          - kubeadm
+          - kubectl
         state: latest
