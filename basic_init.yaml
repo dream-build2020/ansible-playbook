@@ -15,7 +15,7 @@
       when: 
         - ansible_distribution != 'Centos' 
         - ansible_distribution_version != '7.9'     
-
+  
     - name: start download kernel rpm
       yum:
         name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
@@ -26,7 +26,6 @@
         name:
           - kernel-lt-devel
           - kernel-lt
-      var:
         enablerepo: elrepo-kernel
       
     - name: start set new kernel
