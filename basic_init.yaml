@@ -34,7 +34,7 @@
 
     - name: start copy file
       copy:
-        src: ./yum_repos_file/{{ item }}
+        src: yum_repos_file/{{ item }}
         dest: /etc/yum.repos.d
         force: yes
       loop:
@@ -50,5 +50,5 @@
           - git
         state: latest
 
-- import_playbook: ./roles/basic_install_containerd.yaml
-- import_playbook: ./roles/basic_install_k8s.yaml
+- import_playbook: roles/basic_install_containerd.yaml
+- import_playbook: roles/basic_install_k8s.yaml
