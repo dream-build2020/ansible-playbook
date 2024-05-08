@@ -5,7 +5,7 @@
   vars:
     system_os: "{{ ansible_distribution }}"
     system_version: "{{ ansible_distribution_version }}"
-
+    
   tasks:
     - name: system info
       fail:
@@ -26,6 +26,7 @@
         name:
           - kernel-lt-devel
           - kernel-lt
+        state: present
         enablerepo: elrepo-kernel
       
     - name: start set new kernel
