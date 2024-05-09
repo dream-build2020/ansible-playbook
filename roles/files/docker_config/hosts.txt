@@ -1,0 +1,4 @@
+[host."http://hub-mirror.c.163.com"]
+  capabilities = ["pull","resolve"]
+[host."https://docker.mirrors.ustc.edu.cn"]
+  capabilities = ["pull","resolve"]  

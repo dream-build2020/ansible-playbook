@@ -10,7 +10,28 @@
       loop:
         - docker-ce.repo
 
-    - name: start add containerd configure
+    - name: strat yum install containerd
+      yum:
+        name: 
+          - containerd.io
+        state: latest
+
+    - name: start touch file
+      file:
+        path: /etc/containerd/certs.d/docker.io
+        state: directory
+        force: yes
+    
+    - name: start default containerd config.toml
+      # command: containerd config default > /etc/containerd/config.toml
+      copy:
+        src: docker_config/{{ item }}
+        dest: /etc/containerd
+        force: yes
+      loop:
+        - config.toml
+
+    - name: start default containerd crictl.yaml
       copy:
         src: docker_config/{{ item }}
         dest: /etc
@@ -18,17 +39,8 @@
       loop:
         - crictl.yaml
 
-    - name: strat yum install containerd
-      yum:
-        name: 
-          - containerd.io
-        state: latest
-
-    - name: start default containerd config
-      command: containerd config default > /etc/containerd/config.toml
-
     - name: start enaled containerd
       systemd:
         name: containerd
-        state: started
+        state: restarted
         enabled: yes
