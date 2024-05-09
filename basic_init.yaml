@@ -48,6 +48,7 @@
           - vim
           - ansible
           - git
+          - lrzsz
         state: latest
 
 - import_playbook: roles/basic_install_containerd.yaml

@@ -60,8 +60,7 @@ version = 2
     max_container_log_line_size = 16384
     netns_mounts_under_state_dir = false
     restrict_oom_score_adj = false
-    #sandbox_image = "registry.k8s.io/pause:3.6"
-    sandbox_image = "registry.aliyuncs.com/google_containers/pause:3.9"
+    sandbox_image = "registry.k8s.io/pause:3.6"
     selinux_category_range = 1024
     stats_collect_period = 10
     stream_idle_timeout = "4h0m0s"
@@ -113,6 +112,7 @@ version = 2
           runtime_path = ""
           runtime_root = ""
           runtime_type = "io.containerd.runc.v2"
+
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
             BinaryName = ""
             CriuImagePath = ""
@@ -170,6 +170,7 @@ version = 2
 
   [plugins."io.containerd.metadata.v1.bolt"]
     content_sharing_policy = "shared"
+
   [plugins."io.containerd.monitor.v1.cgroups"]
     no_prometheus = false
 
@@ -194,41 +195,6 @@ version = 2
     root_path = ""
 
   [plugins."io.containerd.snapshotter.v1.btrfs"]
-    root_path = ""
-
-  [plugins."io.containerd.snapshotter.v1.devmapper"]
-    async_remove = false
-    base_image_size = ""
-    discard_blocks = false
-    fs_options = ""
-    fs_type = ""
-    pool_name = ""
-    root_path = ""
-
-  [plugins."io.containerd.snapshotter.v1.native"]
-    root_path = ""
-
-  [plugins."io.containerd.snapshotter.v1.overlayfs"]
-    mount_options = []
-    root_path = ""
-    sync_remove = false
-    upperdir_label = false
-
-  [plugins."io.containerd.snapshotter.v1.zfs"]
-    root_path = ""
-
-  [plugins."io.containerd.tracing.processor.v1.otlp"]
-    endpoint = ""
-    insecure = false
-    protocol = ""
-
-[proxy_plugins]
-
-[stream_processors]
-
-  [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
-    accepts = ["application/vnd.oci.image.layer.v1.tar+encrypted"]
-[plugins."io.containerd.snapshotter.v1.btrfs"]
     root_path = ""
 
   [plugins."io.containerd.snapshotter.v1.devmapper"]
