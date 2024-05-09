@@ -16,6 +16,12 @@
         state: stopped
         enabled: no
 
+    - name: start off swap
+      mount:
+        name: swap
+        fstype: swap
+        state: absent
+
     - name: start k8s cri config
       copy:
         src: kubernetes_config/{{ item }}
