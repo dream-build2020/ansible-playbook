@@ -30,7 +30,7 @@
       loop:
         - 99-kubernetes-cri.conf
 
-    - name: start k8s ipvs config
+    - name: start k8s ipvs config-1
       copy:
         src: kubernetes_config/{{ item }}
         dest: /etc/modules-load.d/
@@ -38,17 +38,25 @@
       loop:
         - ipvs.conf
 
+    - name: start k8s ipvs config-2
+      copy:
+        src: ipvs.modules
+        dest: /etc/sysconfig/modules/
+        force: yes
+      loop:
+        - ipvs.modules
+
     - name: strat yum install k8s rpm
       yum:
         name:
-          - ipset 
+          - ipset
           - ipvsadm
           - yum-utils
           - kubelet
           - kubeadm
           - kubectl
         state: latest
-
+    
     - name: star set bridge-nf-call-iptables
       command: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 
