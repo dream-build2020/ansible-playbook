@@ -48,3 +48,9 @@
           - kubeadm
           - kubectl
         state: latest
+
+    - name: star set bridge-nf-call-iptables
+      command: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+
+    - name: start set IP forwarding
+      command: echo 1 > /proc/sys/net/ipv4/ip_forward
