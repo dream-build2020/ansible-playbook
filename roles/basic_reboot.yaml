@@ -1,4 +1,5 @@
 ---
 - name: start reboot system
+  hosts: all
   reboot:
     reboot_timeout: 360
