@@ -14,7 +14,24 @@
         - "system not Centos or not Centos7"
       when: 
         - ansible_distribution != 'Centos' 
-        - ansible_distribution_version != '7.9'     
+        - ansible_distribution_version != '7.9'
+
+    - name: start copy yum file
+      copy:
+        src: yum_repos_file/{{ item }}
+        dest: /etc/yum.repos.d
+        force: yes
+      loop:
+        - CentOS-Base.repo
+        - epel.repo
+
+    - name: start copy etc file
+      copy:
+        src: config/{{ item }}
+        dest: /etc/default
+        force: yes
+      loop:
+        - grub     
   
     - name: start download kernel rpm
       yum:
@@ -30,17 +47,13 @@
         enablerepo: elrepo-kernel
       
     - name: start set new kernel
-      command: grub2-set-default 0
+      shell: | 
+        cmd:
+          /boot/grub2/grub.cfg
+          grub2-set-default 0
+      # 判断系统非UEFI引导
+      when: ansible_efi_bootmgr is not defined
 
-    - name: start copy file
-      copy:
-        src: yum_repos_file/{{ item }}
-        dest: /etc/yum.repos.d
-        force: yes
-      loop:
-        - CentOS-Base.repo
-        - epel.repo
-        
     - name: start install rpm
       yum:
         name:
@@ -53,3 +66,4 @@
 
 - import_playbook: roles/basic_install_containerd.yaml
 - import_playbook: roles/basic_install_k8s.yaml
+- import_playbook: roles/basic_reboot.yaml

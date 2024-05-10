@@ -1,0 +1,4 @@
+---
+- name: start reboot system
+  reboot:
+    reboot_timeout: 360
