@@ -40,7 +40,7 @@
 
     - name: start k8s ipvs config-2
       copy:
-        src: ipvs.modules
+        src: kubernetes_config/ipvs.modules
         dest: /etc/sysconfig/modules/
         force: yes
       loop:
