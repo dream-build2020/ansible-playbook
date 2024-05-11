@@ -46,6 +46,17 @@
       loop:
         - ipvs.modules
 
+    - name: start set sysctl.conf
+      lineinfile:
+        path: /etc/sysctl.conf
+        line: "{{ item }}"
+        state: present
+      loop:
+          - "net.bridge.bridge-nf-call-iptables=1"
+          - "net.ipv4.ip_forward=1"
+      notify:
+        - reload sysctl
+
     - name: strat yum install k8s rpm
       yum:
         name:
