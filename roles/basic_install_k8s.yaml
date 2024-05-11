@@ -22,6 +22,11 @@
         fstype: swap
         state: absent
 
+    - name: start set bridge
+      modprobe:
+        name: bridge
+        state: present
+
     - name: start k8s cri config
       copy:
         src: kubernetes_config/{{ item }}
@@ -56,6 +61,7 @@
     #       - "net.ipv4.ip_forward=1"
     #   notify:
     #     - reload sysctl
+
     - name:
       sysctl:
         name: "{{ item }}"
