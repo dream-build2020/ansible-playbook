@@ -54,6 +54,16 @@
       # 判断系统非UEFI引导
       when: ansible_efi_bootmgr is not defined
 
+    - name: start disable selinux
+      selinux:
+        state: disabled
+    
+    - name: start disable firewalld
+      systemd:
+        name: firewalld
+        state: stopped
+        enabled: no
+
     - name: start install rpm
       yum:
         name:

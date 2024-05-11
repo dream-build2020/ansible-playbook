@@ -10,12 +10,6 @@
       loop:
         - kubernetes.repo
     
-    - name: start disable firewalld
-      systemd:
-        name: firewalld
-        state: stopped
-        enabled: no
-
     - name: start off swap
       mount:
         name: swap
