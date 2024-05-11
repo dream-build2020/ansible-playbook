@@ -22,10 +22,10 @@
         fstype: swap
         state: absent
 
-    - name: start set br_netfilter
-      modprobe:
-        name: br_netfilter
-        state: present
+    # - name: start set br_netfilter
+    #   modprobe:
+    #     name: br_netfilter
+    #     state: present
 
     - name: start k8s cri config
       copy:
@@ -43,13 +43,13 @@
       loop:
         - ipvs.conf
 
-    - name: start k8s ipvs config-2
-      copy:
-        src: kubernetes_config/ipvs.modules
-        dest: /etc/sysconfig/modules/
-        force: yes
-      loop:
-        - ipvs.modules
+    # - name: start k8s ipvs config-2
+    #   copy:
+    #     src: kubernetes_config/ipvs.modules
+    #     dest: /etc/sysconfig/modules/
+    #     force: yes
+    #   loop:
+    #     - ipvs.modules
 
     # - name: start set sysctl.conf
     #   lineinfile:
