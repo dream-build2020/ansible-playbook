@@ -22,10 +22,10 @@
         fstype: swap
         state: absent
 
-    # - name: start set br_netfilter
-    #   modprobe:
-    #     name: br_netfilter
-    #     state: present
+    - name: start set br_netfilter
+      modprobe:
+        name: br_netfilter
+        state: present
 
     - name: start k8s cri config
       copy:
