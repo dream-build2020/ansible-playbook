@@ -33,26 +33,26 @@
       loop:
         - grub     
   
-    - name: start download kernel rpm
-      yum:
-        name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
-        state: present
+    # - name: start download kernel rpm
+    #   yum:
+    #     name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+    #     state: present
     
-    - name: start install kernel
-      yum:
-        name:
-          - kernel-lt-devel
-          - kernel-lt
-        state: present
-        enablerepo: elrepo-kernel
+    # - name: start install kernel
+    #   yum:
+    #     name:
+    #       - kernel-lt-devel
+    #       - kernel-lt
+    #     state: present
+    #     enablerepo: elrepo-kernel
       
-    - name: start set new kernel
-      shell: | 
-        cmd:
-          /boot/grub2/grub.cfg
-          grub2-set-default 0
-      # 判断系统非UEFI引导
-      when: ansible_efi_bootmgr is not defined
+    # - name: start set new kernel
+    #   shell: | 
+    #     cmd:
+    #       /boot/grub2/grub.cfg
+    #       grub2-set-default 0
+    #   # 判断系统非UEFI引导
+    #   when: ansible_efi_bootmgr is not defined
 
     - name: start disable selinux
       selinux:
@@ -72,6 +72,8 @@
           - ansible
           - git
           - lrzsz
+          - net-tools
+          - ntpdate
         state: latest
 
 - import_playbook: roles/basic_install_containerd.yaml
