@@ -1,58 +1,35 @@
 ---
 - hosts: all
-  gather_facts: yes
-
+  name: start init system
+  gather_facts: true
   vars:
     system_os: "{{ ansible_distribution }}"
     system_version: "{{ ansible_distribution_version }}"
-    
-  tasks:
-    - name: system info
-      fail:
-        msg: 
-        - "system is {{ system_os }}, version is {{ system_version }}"
-        - "system not Centos or not Centos7"
-      when: 
-        - ansible_distribution != 'Centos' 
-        - ansible_distribution_version != '7.9'
 
+  tasks:
     - name: start copy yum file
       copy:
-        src: yum_repos_file/{{ item }}
+        src: etc/yum.repos.d/{{ item }}
         dest: /etc/yum.repos.d
         force: yes
       loop:
         - CentOS-Base.repo
         - epel.repo
+        - docker-ce.repo
+        - kubernetes.repo
 
     - name: start copy etc file
       copy:
-        src: config/{{ item }}
+        src: etc/default/{{ item }}
         dest: /etc/default
         force: yes
       loop:
         - grub     
   
-    # - name: start download kernel rpm
-    #   yum:
-    #     name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
-    #     state: present
-    
-    # - name: start install kernel
-    #   yum:
-    #     name:
-    #       - kernel-lt-devel
-    #       - kernel-lt
-    #     state: present
-    #     enablerepo: elrepo-kernel
-      
-    # - name: start set new kernel
-    #   shell: | 
-    #     cmd:
-    #       /boot/grub2/grub.cfg
-    #       grub2-set-default 0
-    #   # 判断系统非UEFI引导
-    #   when: ansible_efi_bootmgr is not defined
+    - name: start download kernel rpm
+      yum:
+        name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+        state: present
 
     - name: start disable selinux
       selinux:
@@ -76,6 +53,26 @@
           - ntpdate
         state: latest
 
-- import_playbook: roles/basic_install_containerd.yaml
-- import_playbook: roles/basic_install_k8s.yaml
-- import_playbook: roles/basic_reboot.yaml
+    - name: start install kernel
+      yum:
+        name:
+          - kernel-lt-devel
+          - kernel-lt
+        state: present
+        enablerepo: elrepo-kernel
+      
+    - name: start set new kernel
+      shell: |
+        grub2-mkconfig -o /boot/grub2/grub  
+        grub2-set-default 0
+      # 判断系统非UEFI引导
+      when: ansible_efi_bootmgr is not defined
+
+    - name: start install kubernetes
+      include_tasks: 
+        - roles/basic_install_containerd.yaml
+        - roles/basic_install_k8s.yaml
+        - roles/basic_reboot.yaml
+      when:
+        - system_os == 'CentOS' 
+        - system_version == '7.9'
