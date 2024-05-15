@@ -69,10 +69,11 @@
       when: ansible_efi_bootmgr is not defined
 
     - name: start install kubernetes
-      include_tasks: 
+      include_tasks: {{ item }}
+      loop:
         - roles/basic_install_containerd.yaml
         - roles/basic_install_k8s.yaml
-        - roles/basic_reboot.yaml
+        - roles/basic_reboot.yaml     
       when:
         - system_os == 'CentOS' 
         - system_version == '7.9'
