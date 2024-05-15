@@ -1,4 +1,15 @@
 ---
+  - name: strat yum install k8s rpm
+    yum:
+      name:
+        - ipset
+        - ipvsadm
+        - yum-utils
+        - kubelet
+        - kubeadm
+        - kubectl
+      state: latest
+
   - name: start off swap
     mount:
       name: swap
@@ -18,7 +29,7 @@
     loop:
       - 99-kubernetes-cri.conf
 
-  - name: start k8s ipvs config-1
+  - name: start k8s ipvs config
     copy:
       src: kubernetes_config/{{ item }}
       dest: /etc/modules-load.d/
@@ -36,17 +47,6 @@
     loop:
       - "net.bridge.bridge-nf-call-iptables"
       - "net.ipv4.ip_forward"
-
-  - name: strat yum install k8s rpm
-    yum:
-      name:
-        - ipset
-        - ipvsadm
-        - yum-utils
-        - kubelet
-        - kubeadm
-        - kubectl
-      state: latest
   
   - name: star set bridge-nf-call-iptables
     command: echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
@@ -54,8 +54,8 @@
   - name: start set IP forwarding
     command: echo 1 > /proc/sys/net/ipv4/ip_forward
 
-  # - name: start set kubectl
-  #   lineinfile:
-  #     path: /etc/default/kubelet
-  #     line: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"'
-  #     insertafter: EOF
+  - name: start set kubectl
+    lineinfile:
+      path: /etc/default/kubelet
+      line: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"'
+      insertafter: EOF
