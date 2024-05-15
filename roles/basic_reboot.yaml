@@ -1,8 +1,4 @@
 ---
-- name: end init system
-  hosts: all
-  tasks:
-
   - name: start reboot 
     reboot:
       reboot_timeout: 360

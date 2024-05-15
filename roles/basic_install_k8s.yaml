@@ -1,9 +1,9 @@
 ---
   - name: start set kubectl
     lineinfile:
-    path: /etc/default/kubelet
-    line: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"'
-    insertafter: EOF
+      path: /etc/default/kubelet
+      line: 'KUBELET_EXTRA_ARGS="--cgroup-driver=systemd"'
+      insertafter: EOF
 
   - name: start off swap
     mount:
