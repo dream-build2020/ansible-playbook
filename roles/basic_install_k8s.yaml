@@ -31,7 +31,7 @@
 
   - name: start k8s ipvs config
     copy:
-      src: /etc/modules-load.d/{{ item }}
+      src: etc/modules-load.d/{{ item }}
       dest: /etc/modules-load.d/
       force: yes
     loop:
