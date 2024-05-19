@@ -51,6 +51,8 @@
           - lrzsz
           - net-tools
           - ntpdate
+          - gcc
+          - yum-utils
         state: latest
 
     - name: start install kernel
@@ -77,3 +79,8 @@
       when:
         - system_os == 'CentOS' 
         - system_version == '7.9'
+
+    - name: selecet install docker
+      include_tasks: roles/basic_install_docker.yaml
+      tags: docker
+      

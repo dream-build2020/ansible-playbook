@@ -1,0 +1,27 @@
+---
+- name: start remove old docker
+  yum:
+    name: 
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-logrotate
+      - docker-engine
+    state: absent
+
+- name: start installl docker
+  yum:
+    name:
+      - docker-ce 
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+
+- name: start enabled docker
+  systemd:
+    name: docker
+    state: restarted
+    enabled: yes

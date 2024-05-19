@@ -7,6 +7,9 @@
             "file:///Users/zhangguangde/ansible-playbook/basic_install_k8s.yaml",
             "file:///Users/zhangguangde/ansible-playbook/basic_init.yaml"
         ],
-        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///Users/zhangguangde/ansible-playbook/roles/basic_install_containerd.yaml"
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": [
+            "file:///Users/zhangguangde/ansible-playbook/roles/basic_install_containerd.yaml",
+            "file:///Users/zhangguangde/ansible-playbook/roles/basic_install_docker.yaml"
+        ]
     }
 }
