@@ -53,6 +53,12 @@
   - name: start set IP forwarding
     command: echo 1 > /proc/sys/net/ipv4/ip_forward
 
+  - name: start kubelet
+    systemd:
+      name: kubelet
+      state: started
+      enabled: yes
+      
   # - name: start set kubectl
   #   lineinfile:
   #     path: /etc/default/kubelet
