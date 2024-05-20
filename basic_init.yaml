@@ -69,6 +69,7 @@
         grub2-set-default 0
       # 判断系统非UEFI引导
       when: ansible_efi_bootmgr is not defined
+      tags: basic
 
     - name: start install kubernetes
       include_tasks: "{{ item }}"
@@ -79,6 +80,7 @@
       when:
         - system_os == 'CentOS' 
         - system_version == '7.9'
+      tags: basic
 
     - name: selecet install docker
       include_tasks: roles/basic_install_docker.yaml
