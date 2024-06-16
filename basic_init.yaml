@@ -27,7 +27,7 @@
         - grub     
   
     - name: start set dns
-      lineinfile;
+      lineinfile:
         dest: /etc/resolv.conf
         line: "{{ item }}"
         with_items:
