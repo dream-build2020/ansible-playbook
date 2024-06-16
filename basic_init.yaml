@@ -25,7 +25,13 @@
         force: yes
       loop:
         - grub     
-  
+
+    - name: start set-off ipv6
+      lineinfile:
+        dest: /etc/sysctl.conf
+        line: "net.ipv6.conf.all.disable_ipv6 = 1"
+      become: yes
+
     - name: start set dns
       lineinfile:
         dest: /etc/resolv.conf
