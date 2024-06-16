@@ -30,10 +30,10 @@
       lineinfile:
         dest: /etc/resolv.conf
         line: "{{ item }}"
-        with_items:
+      with_items:
           - "nameserver 223.5.5.5"
           - "nameserver 223.6.6.6"
-        become: yes
+      become: yes
 
 
     - name: start download kernel rpm
