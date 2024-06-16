@@ -26,6 +26,14 @@
       loop:
         - grub     
   
+    - name: start set dns
+      lineinfile;
+        dest; /etc/resolv.conf
+        line: 
+        - "nameserver 223.5.5.5"
+        - "nameserver 223.6.6.6"
+
+
     - name: start download kernel rpm
       yum:
         name: https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
